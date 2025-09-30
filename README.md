@@ -1,49 +1,53 @@
-# 졸음운전 방지 시스템
+# Drowsy Driving Prevention (졸음운전 방지 시스템)
 
-실시간 **운전자 졸음 및 주시 태만 감지 시스템**입니다.  
-컴퓨터 비전 기술을 활용해 눈 감김, 하품, 전방 시선 이탈을 감지하고,  
-사운드 및 Arduino 진동 모터로 경고를 제공하여 사고를 예방합니다.
+## 📌 프로젝트 개요
+운전자의 눈(안구/눈깜박임)을 실시간으로 트래킹하여 졸음 징후를 감지하면 차량 핸들에 장착된 아두이노에 신호를 보내 **진동 경고**를 발생시키는 시스템입니다.  
+목표는 운전자의 졸음으로 인한 사고 위험을 낮추는 실시간 경고 시스템의 프로토타입 구현입니다.
 
-![screenshot](./KakaoTalk_20231126_185622471_01.png)
+> **중요:** 본 프로젝트는 연구/학습 목적의 프로토타입입니다. 제품화·상업화 또는 안전 관련 실제 적용 전에는 충분한 검증과 인증 절차가 필요합니다.
 
 ---
 
-## 프로젝트 개요
-이 프로젝트는 팀 수업 시간에 제작한 실시간 졸음운전 방지 시스템입니다.  
-- 눈꺼풀 거리, 하품, 고개·시선 각도를 분석
-- 위험 상황 발생 시 즉시 경고
-- GUI 대시보드에서 주행 시간과 상태 확인 가능
+## 🛠 Tech Stack
+- **언어**: Python 3.8+  
+- **Computer Vision / ML**: OpenCV, / MediaPipe / custom ONNX model  
+- **Hardware Interface**: `pyserial` (시리얼 통신을 통한 Arduino 연동)  
+- **Runtime**: 로컬 PC(카메라) + 마이크로컨트롤러(Arduino)  
+- **Optional**: Flask/Socket (원격 모니터링 / 로깅용), Docker
+
+---
+
+## ⚙️ 시스템 구성 (아키텍처)
+1. **카메라(로컬)** — 드라이버 얼굴을 캡처  
+2. **실시간 추적 모듈 (Python)**  
+   - 얼굴/눈 검출 → 안구(눈꺼풀) 위치 추적 → 졸음 지표(예: EAR, PERCLOS, 눈 깜빡임 간격) 계산  
+   - 임계값 기반 또는 ML 분류기로 졸음 판정  
+3. **알림 전송 모듈 (Python)**  
+   - 졸음 판정 시 Arduino로 시리얼 신호 송신(`'1'` 등)  
+4. **아두이노(핸들 제어기)**  
+   - 시리얼 수신 → 진동 모터(또는 햅틱) 구동 → 진동 지속/중지 제어  
+5. **로깅 / 모니터링**  
+   - 경고 발생 기록, 이벤트 타임라인, 대시보드(Flask + DB)
 
 ---
 
 ## 주요 기능
-- **실시간 얼굴·눈·입 검출** (MediaPipe + OpenCV)
-- **졸음 감지**: 눈꺼풀 간격 감소를 기준으로 경고
-- **전방 주시 태만 감지**: 고개·시선 이탈 시 경고
-- **하품 감지**: 입술 거리 기반 경고
-- **경고 시스템**
-  - 음성 알림(MP3)
-  - Arduino 진동 모터
-- **GUI 대시보드** (Kivy/KivyMD)
-  - 주행 시간 표시
-  - 일시정지 / 재생 / 종료 버튼
-  - 전체 화면 카메라 영상 제공
+- 실시간 얼굴/눈/안구 트래킹
+- 졸음 지표(Eye Aspect Ratio 등) 계산 및 임계값 기반 판정
+- Arduino로 즉시 진동 알림 전송(시리얼)
+- 경고 이력 로깅 및 원격 모니터링
 
 ---
 
-## 기술 스택
-- Python 3.x
-- OpenCV (영상 처리)
-- MediaPipe FaceMesh (얼굴 랜드마크 검출)
-- Kivy/KivyMD (GUI)
-- playsound (경고 사운드 재생)
-- Arduino (진동 모터 제어, Serial 통신)
+## 👤 My Role (담당한 부분)
+- 실시간 **눈/안구 트래킹 알고리즘 구현** (OpenCV 기반)  
+- **졸음 판정 로직 설계** (EAR, blink rate 등 지표 적용 및 임계값 튜닝)  
+- **하드웨어 연동**: Python ↔ Arduino 시리얼 통신 구현 및 핸들 진동 제어 프로토콜 설계  
+- 시스템 통합(카메라 → 감지 → 알림 흐름) 및 기본 검증(시나리오별 테스트)
 
 ---
 
-## 설치 및 실행
-```bash
-pip install opencv-python mediapipe kivy kivymd playsound pyserial
-git clone https://github.com/yourname/drowsy-driving-prevention.git
-cd drowsy-driving-prevention
-python main.py
+## 하드웨어
+- Arduino Uno / Nano / ESP32
+- 진동 모터(핸들에 부착) 및 드라이버 회로(트랜지스터, 전원 회로)  
+- 시리얼 통신선 (Python <-> Arduino)

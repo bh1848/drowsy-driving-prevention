@@ -1,4 +1,4 @@
-# Drowsy Driving Prevention (졸음운전 방지 시스템)
+# 졸음운전 방지 시스템
 
 ## 프로젝트 개요
 이 프로젝트는 운전자의 눈 움직임(EAR, 깜빡임 패턴)을 실시간으로 분석하여  
@@ -10,7 +10,7 @@
 
 ---
 
-## Tech Stack
+## 기술 스택
 - **Language**: Python 3.8+
 - **Computer Vision**: OpenCV, face landmark detection, EAR(Eye Aspect Ratio)
 - **Machine Learning**: MediaPipe / Custom ONNX model 기반 눈 감김 감지
@@ -70,7 +70,7 @@
 
 ---
 
-## My Role (방혁)
+## 담당 역할 (Backend)
 
 본 프로젝트에서 Python 기반 AI/시스템 통합을 전담했습니다.
 
@@ -91,7 +91,7 @@
 
 ---
 
-## Summary
+## 회고
 
 이 프로젝트는 Python 기반으로  
 실시간 영상 처리 + AI 분석 + UI + 하드웨어 연동이 결합된 복합 구조였습니다.

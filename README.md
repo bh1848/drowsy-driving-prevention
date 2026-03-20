@@ -1,6 +1,6 @@
 # Drowsy Driving Prevention (졸음운전 방지 시스템)
 
-## 📌 프로젝트 개요
+## 프로젝트 개요
 이 프로젝트는 운전자의 눈 움직임(EAR, 깜빡임 패턴)을 실시간으로 분석하여  
 졸음 징후가 감지되면 차량 핸들에 장착된 Arduino 진동 모듈에 즉시 경고 신호를 보내는   
 졸음운전 방지 프로토타입 시스템입니다.
@@ -10,7 +10,7 @@
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 - **Language**: Python 3.8+
 - **Computer Vision**: OpenCV, face landmark detection, EAR(Eye Aspect Ratio)
 - **Machine Learning**: MediaPipe / Custom ONNX model 기반 눈 감김 감지
@@ -20,7 +20,7 @@
 
 ---
 
-## ⚙️ 시스템 아키텍처
+## 시스템 아키텍처
 
 1. **Webcam**  
    - 운전자의 얼굴·눈 영역을 실시간으로 캡처
@@ -44,7 +44,7 @@
 
 ---
 
-## 🌟 주요 기능
+## 주요 기능
 
 ### ✔ 실시간 얼굴·눈 인식  
 - OpenCV 기반 랜드마크 검출  
@@ -70,7 +70,7 @@
 
 ---
 
-## 👤 My Role (방혁)
+## My Role (방혁)
 
 본 프로젝트에서 Python 기반 AI/시스템 통합을 전담했습니다.
 
@@ -91,7 +91,7 @@
 
 ---
 
-## ✔ Summary
+## Summary
 
 이 프로젝트는 Python 기반으로  
 실시간 영상 처리 + AI 분석 + UI + 하드웨어 연동이 결합된 복합 구조였습니다.
